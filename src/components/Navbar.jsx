@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { FaXmark } from "react-icons/fa6";
@@ -13,6 +13,7 @@ const navigation = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   return (
     <div className="w-full h-13 bg-[#F5F5F0] flex justify-between py-2 md:px-5 lg:px-20">
@@ -47,10 +48,14 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="flex text-lg hidden md:block">
+      <div className=" text-lg hidden md:block">
         {navigation.map((nav) => (
           <Link
-            className=" px-5 py-2 rounded-md hover:bg-black hover:text-white"
+            className={`px-5 py-2 rounded-md ${
+              location.pathname === nav.link
+                ? "bg-black text-white"
+                : "hover:bg-black hover:text-white"
+            }`}
             key={nav.name}
             to={nav.link}
           >
