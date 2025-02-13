@@ -1,5 +1,7 @@
 import { FaEye, FaGithub } from "react-icons/fa";
 import Header from "./Header";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const projects = [
   {
@@ -40,10 +42,10 @@ const Projects = () => {
       {/* project section */}
       <div>
         <Header headingText={"Projects"} />
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project) => (
             <div
-              className="card mb-5 shadow-md bg-[#F5F5F0] w-full  px-5 py-2 m-2 rounded-md"
+              className="card mb-5 shadow-md bg-[#F5F5F0] w-full  px-5 py-2 mt-2 rounded-md"
               key={project.name}
             >
               <div className="w-full max-h-[800px]">
@@ -86,6 +88,15 @@ const Projects = () => {
               </div>
             </div>
           ))}
+        </div>
+        <div className="w-full flex justify-end mb-10 px-2">
+          <Link
+            className="text-sm text-gray-400 flex flex-row gap-2 hover:text-gray-200"
+            to={"/projects"}
+          >
+            <p className="text-sm">All Projects</p>
+            <FaArrowRightLong size={20} />
+          </Link>
         </div>
       </div>
     </div>
