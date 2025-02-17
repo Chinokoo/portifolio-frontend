@@ -114,7 +114,7 @@ const skills = [
     icon: BiLogoMongodb,
   },
   {
-    name: "PHP",
+    name: "Laravel",
     icon: FaLaravel,
   },
 ];
