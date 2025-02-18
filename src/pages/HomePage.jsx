@@ -11,7 +11,7 @@ const HomePage = () => {
       <div className="w-full h-[80%] flex flex-col md:flex-row md:justify-center gap-20 mb-10 overflow-hidden ">
         <div className="text-center md:text-left  flex flex-col  justify-center">
           {/* hero text */}
-          <h1 className="text-5xl font-bold mb-5 mt-2 hover:text-6xl cursor-pointer">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-5 mt-2 transform transition-transform duration-500 cursor-pointer">
             Hi, I&apos;m Peter
           </h1>
           <p className="text-4xl mb-1.5">

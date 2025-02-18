@@ -75,7 +75,7 @@ const ExperiencePage = () => {
           {experiences.map((experience) => (
             <div
               key={experience.role}
-              className="card rounded bg-[#F5F5F0] px-4 py-2 m-5 shadow-md"
+              className="card rounded bg-[#F5F5F0] hover:bg-gray-300 px-4 py-2 m-5 shadow-md"
             >
               <div className="flex flex-col md:flex-row  justify-between">
                 <span className="font-bold italic text-gray-500 md:w-md">
