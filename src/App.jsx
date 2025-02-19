@@ -5,6 +5,9 @@ import ProjectsPage from "./pages/ProjectsPage";
 import ExperiencePage from "./pages/ExperiencePage";
 import EducationPage from "./pages/EducationPage";
 import ContactPage from "./pages/ContactPage";
+import Login from "./pages/auth/Login";
+import { Toaster } from "react-hot-toast";
+import Register from "./pages/auth/Register";
 
 function App() {
   return (
@@ -18,8 +21,11 @@ function App() {
             <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/education" element={<EducationPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
+        <Toaster />
       </div>
     </div>
   );

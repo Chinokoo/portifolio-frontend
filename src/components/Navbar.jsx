@@ -9,6 +9,7 @@ const navigation = [
   { name: "Experience", link: "/experience" },
   { name: "Education", link: "/education" },
   { name: "Contact", link: "/contact" },
+  { name: "PC", link: "/login" },
 ];
 
 const Navbar = () => {
@@ -31,7 +32,7 @@ const Navbar = () => {
         onClick={() => setIsOpen(!isOpen)}
       />
       {isOpen && (
-        <div className="w-3/5 h-[50vh] rounded-md shadow flex flex-col z-5 absolute top-10 right-5 bg-[#F5F5F0] ">
+        <div className="w-3/5 h-[42vh] overflow-hidden rounded-md shadow flex flex-col z-5 absolute top-10 right-5 bg-[#F5F5F0] ">
           <div className="flex justify-end p-2">
             <FaXmark size={18} onClick={() => setIsOpen(!isOpen)} />
           </div>

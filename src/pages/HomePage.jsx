@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import AboutSection from "../components/home/AboutSection";
 import Projects from "./../components/home/Projects";
 import Footer from "../components/home/Footer";
+
 import ExperienceSection from "../components/home/ExperienceSection";
 
 const HomePage = () => {
@@ -38,7 +39,7 @@ const HomePage = () => {
           </div>
         </div>
         {/* image container */}
-        <div className="border mt-2 md:mt-5 rounded  md:rounded-full border-[#F5F5F0] bg-[#F5F5F0] hover:bg-gray-200">
+        <div className="border mt-2 md:mt-5 rounded shadow-md  md:rounded-full border-[#F5F5F0] bg-[#F5F5F0] hover:bg-gray-200">
           <img className=" w-3/4 " src="/peter.png" alt="me" />
         </div>
       </div>
