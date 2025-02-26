@@ -25,7 +25,7 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </div>
-        <Toaster />
+        <Toaster position="top-right" reverseOrder={true} />
       </div>
     </div>
   );

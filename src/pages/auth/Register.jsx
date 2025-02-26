@@ -1,6 +1,17 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(name, email, password, confirmPassword);
+  };
+
   return (
     <div className="min-h-screen w-full flex justify-center overflow-hidden">
       <div className="bg-[#F5F5F0] mt-5 w-full  h-max md:w-xl md:rounded-md shadow-xl ">
@@ -11,7 +22,7 @@ const Register = () => {
           </p>
         </div>
         <div>
-          <form className="flex flex-col gap-2 px-3" action="">
+          <form className="flex flex-col gap-2 px-3" onSubmit={handleSubmit}>
             <label className="text-md font-medium" htmlFor="name">
               Name
             </label>
@@ -19,7 +30,8 @@ const Register = () => {
               className="border-2 shadow-md border-gray-400 bg-white rounded-md p-2"
               type="text"
               name="name"
-              placeholder=""
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <label className="text-md font-medium" htmlFor="email">
               Email
@@ -28,7 +40,8 @@ const Register = () => {
               className="border-2 shadow-md border-gray-400 bg-white rounded-md p-2"
               type="text"
               name="email"
-              placeholder=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <label className="text-md font-medium" htmlFor="password">
               Password
@@ -37,7 +50,8 @@ const Register = () => {
               className="border-2 shadow-md border-gray-400 bg-white rounded-md p-2"
               type="password"
               name="password"
-              placeholder=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <label className="text-md font-medium" htmlFor="password">
               Confirm your Password
@@ -45,15 +59,19 @@ const Register = () => {
             <input
               className="border-2 shadow-md border-gray-400 bg-white rounded-md p-2"
               type="password"
-              name="password"
-              placeholder=""
+              name="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-            <button className="w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md">
+            <button
+              className="w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
+              type="submit"
+            >
               Login
             </button>
-            <div className="flex gap-2 pb-2">
-              <p className="text-gray-500">create a new user account</p>
+            <div className="flex gap-2 pb-2 w-full">
+              <p className="text-gray-500">login to your account</p>
               <Link className="font-medium hover:underline" to={"/login"}>
                 here
               </Link>
