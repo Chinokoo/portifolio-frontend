@@ -28,7 +28,7 @@ const AddProject = () => {
   //     }
   //   };
   return (
-    <div className="w-full bg-gray-100 shadow-md rounded-md">
+    <div className=" bg-gray-100 shadow-md rounded-md">
       <h3 className="text-2xl font-medium text-center pt-5">Add Project </h3>
       <form className="flex flex-col space-y-5 px-2" onSubmit={handleSubmit}>
         <label htmlFor="name" className="font-medium mb-1.5">

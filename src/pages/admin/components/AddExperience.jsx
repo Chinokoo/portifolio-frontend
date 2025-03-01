@@ -1,6 +1,6 @@
 const AddExperience = () => {
   return (
-    <div className="w-full bg-gray-300 shadow-md rounded-md">
+    <div className=" bg-gray-300 shadow-md rounded-md">
       <h3 className="text-2xl font-medium text-center mt-5">Add Experience</h3>
       <form className="flex flex-col space-y-5 px-2">
         <label htmlFor="companyName" className="font-medium mb-1.5">
@@ -31,7 +31,7 @@ const AddExperience = () => {
           //onChange={(e) => setDescription(e.target.value)}
           className="border-2 border-black rounded-md p-2"
         />
-        <div className="flex gap-5">
+        <div className="flex flex-col flex-wrap md:flex-row gap-3 md:gap-5">
           <label className="font-medium mb-1.5" htmlFor="startDate">
             Starting Date
           </label>

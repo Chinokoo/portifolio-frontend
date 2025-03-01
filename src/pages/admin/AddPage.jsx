@@ -4,11 +4,11 @@ import AddProject from "./components/AddProject";
 
 const AddPage = () => {
   return (
-    <div className="flex flex-col md:flex-row gap-5 m-5">
-      <div className="w-full lg:w-lg">
+    <div className="flex flex-col overflow-hidden md:flex-row md:gap-5 md:m-5">
+      <div className="flex-1">
         <AddProject />
       </div>
-      <div className="w-full md:w-lg flex flex-col gap-5">
+      <div className="flex flex-col gap-5">
         <AddEducation />
         <AddExperience />
       </div>

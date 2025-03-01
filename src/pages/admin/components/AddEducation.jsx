@@ -1,7 +1,7 @@
 const AddEducation = () => {
   const loading = false;
   return (
-    <div className="w-full shadow-md rounded-md bg-[#F5F5F0]">
+    <div className=" shadow-md rounded-md bg-[#F5F5F0]">
       <h3 className="text-2xl font-medium text-center mt-5">Add Education</h3>
       <form className="flex flex-col space-y-5 px-2">
         <label htmlFor="name" className="font-medium mb-1.5">
