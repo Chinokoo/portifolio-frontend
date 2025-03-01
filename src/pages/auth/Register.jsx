@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuthStore } from "../../store/authStore";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -7,9 +8,11 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const { register, loading } = useAuthStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, password, confirmPassword);
+    register({ name, email, password, confirmPassword });
   };
 
   return (
@@ -68,7 +71,7 @@ const Register = () => {
               className="w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
               type="submit"
             >
-              Login
+              {loading ? "Loading" : "Register"}
             </button>
             <div className="flex gap-2 pb-2 w-full">
               <p className="text-gray-500">login to your account</p>

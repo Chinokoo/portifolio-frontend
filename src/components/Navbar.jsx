@@ -2,19 +2,21 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { FaXmark } from "react-icons/fa6";
-
-const navigation = [
-  { name: "Home", link: "/" },
-  { name: "Projects", link: "/projects" },
-  { name: "Experience", link: "/experience" },
-  { name: "Education", link: "/education" },
-  { name: "Contact", link: "/contact" },
-  { name: "PC", link: "/login" },
-];
+import { useAuthStore } from "../store/authStore";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user } = useAuthStore();
+
+  const navigation = [
+    { name: "Home", link: "/" },
+    { name: "Projects", link: "/projects" },
+    { name: "Experience", link: "/experience" },
+    { name: "Education", link: "/education" },
+    { name: "Contact", link: "/contact" },
+    user ? { name: "Admin", link: "/admin" } : { name: "PC", link: "/login" },
+  ];
 
   return (
     <div className="w-full h-13 bg-[#F5F5F0] flex justify-between py-2 md:px-5 lg:px-20">

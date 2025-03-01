@@ -8,21 +8,47 @@ import ContactPage from "./pages/ContactPage";
 import Login from "./pages/auth/Login";
 import { Toaster } from "react-hot-toast";
 import Register from "./pages/auth/Register";
+import { useAuthStore } from "./store/authStore";
+import { useEffect } from "react";
+import { AiOutlineLoading } from "react-icons/ai";
+import AdminHomePage from "./pages/admin/AdminHomePage";
 
 function App() {
+  const { checkAuth, checkingAuth, user } = useAuthStore();
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (checkingAuth) {
+    return (
+      <div className="min-h-screen w-full flex justify-center items-center">
+        <AiOutlineLoading className="h-20 w-20 animate-spin" />
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen w-full flex justify-center">
       <div className="w-full min-h-screen">
         <Navbar />
-        <div className="  mx-0  md:mx-5 lg:mx-20">
+        <div className="  mx-0  md:mx-5 lg:mx-15">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
             <Route path="/experience" element={<ExperiencePage />} />
             <Route path="/education" element={<EducationPage />} />
             <Route path="/contact" element={<ContactPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={user ? <AdminHomePage /> : <Login />}
+            />
+            <Route
+              path="/register"
+              element={user ? <AdminHomePage /> : <Register />}
+            />
+            <Route
+              path="/admin"
+              element={user ? <AdminHomePage /> : <Login />}
+            />
           </Routes>
         </div>
         <Toaster position="top-right" reverseOrder={true} />
