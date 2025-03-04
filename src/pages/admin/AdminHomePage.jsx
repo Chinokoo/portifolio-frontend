@@ -16,11 +16,13 @@ const AdminHomePage = () => {
   };
   return (
     <div className="min-h-screen w-full flex">
-      <div className=" w-2/12 bg-[#F5F5F0] shadow-md">
+      <div className=" w-2/12 bg-[#F5F5F0] shadow-md min-h-screen">
         <ul className="w-full mt-10">
           <li>
             <button
-              className="flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 hover:text-white"
+              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
+                isTab === "add" ? "bg-black text-white" : ""
+              } hover:text-white `}
               onClick={() => setIsTab("add")}
             >
               <MdAddCircle className="group-hover:animate-ping" size={20} />
@@ -29,7 +31,9 @@ const AdminHomePage = () => {
           </li>
           <li>
             <button
-              className="flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 hover:text-white"
+              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
+                isTab === "projects" ? "bg-black text-white" : ""
+              } hover:text-white `}
               onClick={() => setIsTab("projects")}
             >
               <PiProjectorScreenChartThin
@@ -41,19 +45,20 @@ const AdminHomePage = () => {
           </li>
           <li>
             <button
-              className="flex group gap-2 w-full items-center px-4 py-2 hover:bg-gray-500 hover:text-white "
+              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
+                isTab === "experience" ? "bg-black text-white" : ""
+              } hover:text-white `}
               onClick={() => setIsTab("experience")}
             >
-              <BsWrenchAdjustable
-                className="group-hover:animate-spin"
-                size={20}
-              />
+              <BsWrenchAdjustable size={20} />
               <h2 className="font-medium hidden md:block">Experience</h2>
             </button>
           </li>
           <li>
             <button
-              className="flex w-full group gap-2 items-center px-4 py-2 hover:bg-gray-500 hover:text-white "
+              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
+                isTab === "education" ? "bg-black text-white" : ""
+              } hover:text-white `}
               onClick={() => setIsTab("education")}
             >
               <MdOutlineSchool
@@ -65,7 +70,9 @@ const AdminHomePage = () => {
           </li>
           <li>
             <button
-              className="flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 hover:text-white "
+              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
+                isTab === "logout" ? "bg-black text-white" : ""
+              } hover:text-white `}
               onClick={() => handleLogout}
             >
               <AiOutlineLogout

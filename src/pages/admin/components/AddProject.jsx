@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useProjectStore } from "../../../store/projectStore";
 
 const AddProject = () => {
   const [name, setName] = useState("");
@@ -8,25 +9,33 @@ const AddProject = () => {
   const [image, setImage] = useState(null);
   const [type, setType] = useState("");
   const [date, setDate] = useState("");
-  const loading = false;
+
+  const { loading, addProject } = useProjectStore();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ name, type, description, liveUrl, githubUrl, image, date });
+    addProject({ name, type, description, liveUrl, githubUrl, image, date });
+    setName("");
+    setDescription("");
+    setGithubUrl("");
+    setLiveUrl("");
+    setImage(null);
+    setType("");
+    setDate("");
+  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const fileInputRef = useRef(null);
-  // add to handle project function
-  //   const handleImageChange = (e) => {
-  //     const file = e.target.files[0];
-  //     if (file) {
-  //       const reader = new FileReader();
-  //       reader.onloadend = () => {
-  //         setImage(reader.result);
-  //       };
-  //       reader.readAsDataURL(file);
-  //     }
-  //   };
+  //
   return (
     <div className=" bg-gray-100 shadow-md rounded-md">
       <h3 className="text-2xl font-medium text-center pt-5">Add Project </h3>
@@ -102,13 +111,27 @@ const AddProject = () => {
             ref={fileInputRef}
             type="file"
             accept="image/*"
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={handleImageChange}
             className="hidden"
           />
         </div>
+        {image && (
+          <div>
+            <img src={image} alt="Project" className="mt-2 w-52" />
+            <p className="text-sm text-ellipsis overflow-hidden text-black w-[200px] p-2">
+              {image}
+            </p>
+          </div>
+        )}
+
         <button
-          className="w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
+          className={`${
+            !loading
+              ? "w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
+              : "w-full py-2 bg-black hover:bg-gray-700 opacity-50 cursor-not-allowed my-5 text-white rounded-md"
+          } `}
           type="submit"
+          disabled={loading}
         >
           {loading ? "Loading. . ." : "Add Project"}
         </button>
