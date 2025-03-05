@@ -48,6 +48,17 @@ export const useProjectStore = create((set) => ({
       set({ loading: false });
     }
   },
+  getRecommendedProjects: async () => {
+    set({ loading: true });
+    try {
+      const res = await axiosInstance.get("/projects/recommended");
+      set({ projects: res.data.projects });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      set({ loading: false });
+    }
+  },
   //update project function
   updateProject: async ({
     id,
@@ -86,6 +97,8 @@ export const useProjectStore = create((set) => ({
       set({ loading: false });
     }
   },
+
+  //deleting project
   deleteProject: async (id) => {
     set({ loading: true });
     try {

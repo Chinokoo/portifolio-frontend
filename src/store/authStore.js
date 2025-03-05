@@ -12,9 +12,10 @@ export const useAuthStore = create((set) => ({
     try {
       const res = await axiosInstance.post("/auth/signin", { email, password });
       toast.success(res.data.message);
+      set({ user: res.data.user });
     } catch (error) {
-      set({ loading: false });
       toast.error(error.response.data.message);
+      set({ user: null });
     } finally {
       set({ loading: false });
     }
@@ -29,7 +30,9 @@ export const useAuthStore = create((set) => ({
           password,
           confirmPassword,
         });
+
         toast.success(res.data.message);
+        set({ user: res.data.user });
       } else {
         toast.error("Passwords do not match");
       }
@@ -48,6 +51,20 @@ export const useAuthStore = create((set) => ({
       set({ user: res.data.user, checkingAuth: false });
     } catch (error) {
       toast.error(error.response.data.message);
+    } finally {
+      set({ checkingAuth: false });
+    }
+  },
+  logOut: async () => {
+    set({ loading: true });
+    try {
+      const res = await axiosInstance.post("/auth/logout");
+      toast.success(res.data.message);
+      set({ user: null });
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      set({ loading: false });
     }
   },
 }));

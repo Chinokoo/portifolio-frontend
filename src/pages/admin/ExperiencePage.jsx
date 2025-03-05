@@ -3,9 +3,12 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { TbTableOff } from "react-icons/tb";
 import { useExperienceStore } from "../../store/experienceStore";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { FaXmark } from "react-icons/fa6";
+import EditExperience from "./components/EditExperience";
 
 const ExperiencePage = () => {
-  const { experiences, loading, getExperience } = useExperienceStore();
+  const { experiences, loading, getExperience, deleteExperience } =
+    useExperienceStore();
   // State variable to track modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
@@ -27,13 +30,15 @@ const ExperiencePage = () => {
     return (
       <div className="flex flex-col justify-center items-center w-full h-full">
         <TbTableOff className="h-48 w-48 text-red-500" />
-        <p className="text-lg text-gray-400 italic">No projects available !</p>
+        <p className="text-lg text-gray-400 italic">
+          No Experiences available !
+        </p>
       </div>
     );
   }
 
   const handleDelete = async (id) => {
-    deleteProject(id);
+    deleteExperience(id);
     setIsDelete(false);
   };
 
@@ -90,12 +95,12 @@ const ExperiencePage = () => {
             {experiences.map((experience) => (
               <tr className="hover:bg-gray-200" key={experience._id}>
                 <td className="px-2 py-2 whitespace-nowrap hidden lg:block">
-                  <span className="text-md font-medium text-black">
+                  <span className="text-md font-medium text-black  overflow-hidden line-clamp-1 text-ellipsis">
                     {experience.companyName}
                   </span>
                 </td>
                 <td className="px-2 py-2 whitespace-nowrap">
-                  <span className="text-md font-medium text-black">
+                  <span className="text-md font-medium text-black overflow-hidden line-clamp-1 text-ellipsis">
                     {experience.jobTitle}
                   </span>
                 </td>
@@ -111,6 +116,14 @@ const ExperiencePage = () => {
                       month: "long",
                     })}
                     ,{new Date(experience.startDate).getFullYear()}
+                  </span>
+                </td>
+                <td className="px-2 py-2  whitespace-nowrap ">
+                  <span className="text-md font-medium text-black  overflow-hidden">
+                    {new Date(experience.endDate).toLocaleString("default", {
+                      month: "long",
+                    })}
+                    ,{new Date(experience.endDate).getFullYear()}
                   </span>
                 </td>
                 <td className="px-2 py-4 whitespace-nowrap">
@@ -149,7 +162,7 @@ const ExperiencePage = () => {
                 <FaXmark className="w-5 h-5" />
               </button>
             </div>
-            <EditProject project={project} />
+            <EditExperience oldExperience={experience} />
           </div>
         </div>
       )}
@@ -162,7 +175,7 @@ const ExperiencePage = () => {
               </button>
             </div>
             <h1 className="text-2xl font-bold px-2 text-red-500">
-              Delete {project.name} !
+              Delete {experience.companyName} !
             </h1>
             <p className="px-2 py-2 text-sm text-gray-500">
               Are you sure you want to delete this project?
@@ -176,7 +189,7 @@ const ExperiencePage = () => {
               </button>
               <button
                 className="w-full py-2 bg-red-500 hover:bg-red-700  my-5 text-white rounded-md"
-                onClick={() => handleDelete(project._id)}
+                onClick={() => handleDelete(experience._id)}
               >
                 Delete
               </button>

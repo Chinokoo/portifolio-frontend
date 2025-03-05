@@ -25,13 +25,13 @@ const HomePage = () => {
           {/* hero buttons */}
           <div className="flex flex-row gap-5 justify-center md:justify-start mt-5">
             <Link
-              className="bg-black text-white px-3 py-2 rounded-md hover:bg-[#F5F5F0] hover:text-black"
+              className="bg-black text-white px-3 shadow-md py-2 rounded-md hover:bg-[#F5F5F0] hover:text-black"
               to={"/contact"}
             >
               Talk with Me
             </Link>
             <Link
-              className="border border-gray-400  px-3 py-2 rounded-md hover:bg-[#F5F5F0]"
+              className="border border-gray-400 shadow-md px-3 py-2 rounded-md hover:bg-[#F5F5F0]"
               to={"/projects"}
             >
               View My Work

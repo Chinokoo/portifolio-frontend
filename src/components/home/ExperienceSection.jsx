@@ -1,39 +1,23 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
-const experiences = [
-  {
-    role: "DCHSA",
-    company: "Ministry of Health",
-    location: "Lilongwe, Malawi",
-    yearStarted: "2022",
-    yearEnded: "2023",
-    description:
-      " Designed and developed multiple web applications using React and Node.js Collaborated with cross-functional teams to identify and prioritize project requirements Implemented automated testing and deployment scripts using Jes and CircleCI",
-  },
-  {
-    role: "DCHSA",
-    company: "Ministry of Health",
-    location: "Lilongwe, Malawi",
-    yearStarted: "2022",
-    yearEnded: "2023",
-
-    description:
-      " Designed and developed multiple web applications using React and Node.js Collaborated with cross-functional teams to identify and prioritize project requirements Implemented automated testing and deployment scripts using Jes and CircleCI",
-  },
-  {
-    role: "DCHSA",
-    company: "Ministry of Health",
-    location: "Lilongwe, Malawi",
-    yearStarted: "2022",
-    yearEnded: "2023",
-
-    description:
-      " Designed and developed multiple web applications using React and Node.js Collaborated with cross-functional teams to identify and prioritize project requirements Implemented automated testing and deployment scripts using Jes and CircleCI",
-  },
-];
+import { useExperienceStore } from "./../../store/experienceStore";
+import { useEffect } from "react";
 
 const ExperienceSection = () => {
+  const { experiences, getExperience } = useExperienceStore();
+
+  useEffect(() => {
+    getExperience();
+  }, [getExperience]);
+
+  if (experiences.length === 0) {
+    return (
+      <div className="flex justify-center">
+        <h1 className="text-gray-500 italic">No Experiences Available!</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="w-full flex flex-col md:flex-row md:justify-center gap-10 mb-5">
@@ -44,21 +28,29 @@ const ExperienceSection = () => {
           <div className="grid grid-rows-3 gap-5">
             {experiences.map((experience) => (
               <div
-                key={experience.role}
+                key={experience._id}
                 className="card rounded bg-gray-300 px-4 py-2 shadow-md"
               >
                 <div className="flex justify-between">
-                  <h1 className="font-bold text-2xl">{experience.role}</h1>
+                  <h1 className="font-bold text-2xl">{experience.jobTitle}</h1>
                   <div>
                     <span className="font-bold italic  text-gray-500">
-                      {experience.yearStarted} - {experience.yearEnded}
+                      {new Date(experience.startDate).toLocaleString(
+                        "default",
+                        {
+                          month: "long",
+                        }
+                      )}{" "}
+                      {new Date(experience.endDate).getFullYear()} -{" "}
+                      {new Date(experience.endDate).toLocaleString("default", {
+                        month: "long",
+                      })}{" "}
+                      {new Date(experience.endDate).getFullYear()}
                     </span>
-                    <p className="text-md text-gray-500">
-                      {experience.location}
-                    </p>
+                    <p>{experience.location}</p>
                   </div>
                 </div>
-                <p>{experience.company}</p>
+                <p>{experience.companyName}</p>
                 <p className="text-gray-500 text-ellipsis line-clamp-3 ">
                   {experience.description}
                 </p>

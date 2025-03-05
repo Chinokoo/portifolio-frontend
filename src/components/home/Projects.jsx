@@ -2,41 +2,22 @@ import { FaEye, FaGithub } from "react-icons/fa";
 import Header from "./Header";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
-const projects = [
-  {
-    name: "KJV BIBLE",
-    image: "/images/kjv.png",
-    type: "frontend",
-    date: "October 2023",
-    githubUrl: "https://github.com/Chinokoo",
-    liveUrl: "",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ametcommodi quo minima non veritatis eius, et aliquid oditeligendi soluta. Lorem ipsum dolor sit amet consectetur,adipisicing elit. Animi reprehenderit natus similique ab iste magni voluptate fuga ducimus rerum molestiae.",
-  },
-  {
-    name: "ECOMMERCE",
-    image: "/images/mens_wear_screenshot.png",
-    type: "frontend",
-    date: "October 2023",
-    githubUrl: "https://github.com/Chinokoo",
-    liveUrl: "https://ecommerce-web-app-frontend-ashy.vercel.app/",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ametcommodi quo minima non veritatis eius, et aliquid oditeligendi soluta. Lorem ipsum dolor sit amet consectetur,adipisicing elit. Animi reprehenderit natus similique ab iste magni voluptate fuga ducimus rerum molestiae.",
-  },
-  {
-    name: "PETER GAMES",
-    image: "/images/peter-games.png",
-    type: "frontend",
-    date: "October 2023",
-    githubUrl: "https://github.com/Chinokoo",
-    liveUrl: "https://ecommerce-web-app-frontend-ashy.vercel.app/",
-    description:
-      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ametcommodi quo minima non veritatis eius, et aliquid oditeligendi soluta. Lorem ipsum dolor sit amet consectetur,adipisicing elit. Animi reprehenderit natus similique ab iste magni voluptate fuga ducimus rerum molestiae.",
-  },
-];
+import { useProjectStore } from "./../../store/projectStore";
+import { useEffect } from "react";
 
 const Projects = () => {
+  const { getRecommendedProjects, projects } = useProjectStore();
+  useEffect(() => {
+    getRecommendedProjects();
+  }, [getRecommendedProjects]);
+
+  if (projects.length === 0) {
+    return (
+      <div className="w-full h-20 flex justify-center">
+        <p className="text-sm text-gray-500">No projects Available!</p>
+      </div>
+    );
+  }
   return (
     <div>
       {/* project section */}
@@ -59,7 +40,12 @@ const Projects = () => {
                 <h1 className="text-2xl font-bold underline py-2 tracking-wider hover:text-gray-500 ">
                   {project.name}
                 </h1>
-                <p className="text-gray-400 font-bold">{project.date}</p>
+                <p className="text-gray-400 font-bold">
+                  {new Date(project.date).getFullYear()}{" "}
+                  {new Date(project.date).toLocaleString("default", {
+                    month: "long",
+                  })}
+                </p>
                 <div className="w-[90%]  overflow-hidden">
                   <p className="text-sm  text-ellipsis line-clamp-3 text-gray-500">
                     {project.description}
