@@ -1,8 +1,11 @@
 import axios from "axios";
 
+const baseURL = import.meta.env.PROD
+  ? "https://portifolio-backend-pppp.onrender.com/api"
+  : "http://localhost:3001/api";
+
 export const axiosInstance = axios.create({
-  baseURL: "https://portifolio-backend-pppp.onrender.com/api",
-  // "http://localhost:3001/api",
+  baseURL: baseURL,
   withCredentials: true,
   credentials: "include",
   headers: {
