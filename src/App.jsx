@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ProjectsPage from "./pages/ProjectsPage";
@@ -15,6 +15,7 @@ import AdminHomePage from "./pages/admin/AdminHomePage";
 
 function App() {
   const { checkAuth, checkingAuth, user } = useAuthStore();
+
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
@@ -23,6 +24,7 @@ function App() {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <AiOutlineLoading className="h-20 w-20 animate-spin" />
+        console.log(user);
       </div>
     );
   }
@@ -39,15 +41,15 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route
               path="/login"
-              element={user ? <AdminHomePage /> : <Login />}
+              element={!user ? <Login /> : <Navigate to={"/admin"} />}
             />
             <Route
               path="/register"
-              element={user ? <AdminHomePage /> : <Register />}
+              element={!user ? <Register /> : <Navigate to={"/admin"} />}
             />
             <Route
               path="/admin"
-              element={user ? <AdminHomePage /> : <Login />}
+              element={user ? <AdminHomePage /> : <Navigate to={"/login"} />}
             />
           </Routes>
         </div>
