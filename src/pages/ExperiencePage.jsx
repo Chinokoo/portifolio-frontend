@@ -20,21 +20,24 @@ const ExperiencePage = () => {
               className="card rounded bg-[#F5F5F0] hover:bg-gray-300 px-4 py-2 m-5 shadow-md"
             >
               <div className="flex flex-col md:flex-row  justify-between">
-                <span className="font-bold italic text-gray-500 md:w-md lg:w-lg">
-                  {new Date(experience.startDate).getFullYear()}{" "}
-                  {new Date(experience.startDate).toLocaleString("default", {
-                    month: "long",
-                  })}{" "}
-                  -{" "}
-                  {experience.endDate === null
-                    ? "Present"
-                    : new Date(experience.endDate).getFullYear() +
-                      " " +
-                      new Date(experience.endDate).toLocaleString("default", {
-                        month: "long",
-                      })}
-                </span>
-                <div className="md:border-l-2 border-gray-500 pl-2">
+                <div>
+                  <span className="font-bold italic text-gray-500 ">
+                    {new Date(experience.startDate).getFullYear()}{" "}
+                    {new Date(experience.startDate).toLocaleString("default", {
+                      month: "long",
+                    })}{" "}
+                    -{" "}
+                    {experience.endDate === null
+                      ? "Present"
+                      : new Date(experience.endDate).getFullYear() +
+                        " " +
+                        new Date(experience.endDate).toLocaleString("default", {
+                          month: "long",
+                        })}
+                  </span>
+                </div>
+
+                <div className="md:border-l-2 border-gray-500 pl-2 md:w-4/5">
                   <div className="flex flex-row gap-2">
                     <h1 className="text-2xl font-bold">
                       {experience.jobTitle} -

@@ -141,25 +141,21 @@ const ProjectsPage = () => {
 
           {filteredProjects.map((project) => (
             <div
-              className="flex flex-col bg-[#F5F5F0] hover:bg-gray-500 shadow-lg hover:text-white md:flex-row gap-5  mt-2 rounded-md"
+              className="flex flex-col bg-[#F5F5F0] hover:bg-gray-500 shadow-lg hover:text-white md:flex-row gap-5 md:h-[300px] mt-2 rounded-md"
               key={project.name}
             >
-              <div className="w- h-full">
+              <div className="w-full h-[300px] md:h-full md:w-[400px] flex-shrink-0 overflow-hidden">
                 <img
-                  className="w-full md:w-full max-h-122   rounded-l-md  object-cover object-fit-cover"
+                  className="w-full h-full object-cover rounded-l-md"
                   src={project.image}
                   alt={project.name}
-                  style={{
-                    aspectRatio: "16/9", // set aspect ratio to 16:9
-                    maxHeight: "300px", // adjust this value to your desired max height
-                    maxWidth: "100%", // set max width to 100% to maintain aspect ratio
-                  }}
+                  loading="lazy"
                 />
               </div>
-              <div className="px-5 ">
-                <h2 className="px-2 text-lg font-medium">{project.name}</h2>
-                <p className="">{project.description}</p>
-                <div className="flex gap-5 px-2 py-4">
+              <div className="overflow-y-auto p-4">
+                <h2 className="text-lg font-medium">{project.name}</h2>
+                <p className="mt-2">{project.description}</p>
+                <div className="flex gap-5 mt-4">
                   {project.liveUrl && (
                     <a
                       target="_blank"
@@ -182,7 +178,7 @@ const ProjectsPage = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div>{" "}
       </div>
     </div>
   );
