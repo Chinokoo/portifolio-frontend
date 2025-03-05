@@ -24,7 +24,6 @@ function App() {
     return (
       <div className="min-h-screen w-full flex justify-center items-center">
         <AiOutlineLoading className="h-20 w-20 animate-spin" />
-        console.log(user);
       </div>
     );
   }
