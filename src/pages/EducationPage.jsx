@@ -10,7 +10,7 @@ const EducationPage = () => {
   return (
     <div>
       <div className="w-full flex flex-col md:flex-row md:justify-center gap-10 my-5">
-        <h2 className="text-3xl font-bold text-center md:text-left  mt-2 hover:text-3xl">
+        <h2 className="text-3xl md:w-md lg:w-lg font-bold text-center md:text-left  mt-2 hover:text-3xl">
           My Educational Background
         </h2>
         <div>

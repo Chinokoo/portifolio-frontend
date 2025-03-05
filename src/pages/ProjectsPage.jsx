@@ -144,11 +144,16 @@ const ProjectsPage = () => {
               className="flex flex-col bg-[#F5F5F0] hover:bg-gray-500 shadow-lg hover:text-white md:flex-row gap-5  mt-2 rounded-md"
               key={project.name}
             >
-              <div className="w-full h-full">
+              <div className="w- h-full">
                 <img
                   className="w-full md:w-full max-h-122   rounded-l-md  object-cover object-fit-cover"
                   src={project.image}
                   alt={project.name}
+                  style={{
+                    aspectRatio: "16/9", // set aspect ratio to 16:9
+                    maxHeight: "300px", // adjust this value to your desired max height
+                    maxWidth: "100%", // set max width to 100% to maintain aspect ratio
+                  }}
                 />
               </div>
               <div className="px-5 ">
