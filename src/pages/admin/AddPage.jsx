@@ -1,4 +1,4 @@
-import AddEducation from "./components/addEducation";
+import AddEducation from "./components/AddEducation";
 import AddExperience from "./components/AddExperience";
 import AddProject from "./components/AddProject";
 
