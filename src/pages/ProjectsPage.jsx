@@ -87,7 +87,7 @@ const ProjectsPage = () => {
               className="bg-[#F5F5F0] hover:bg-black hover:text-white rounded-md px-4 py-2 mt-5  flex gap-5"
               key={skill.id}
             >
-              <skill.icon className="h-7 w-7" />
+              <skill.icon className="h-3 w-3 md:h-7 md:w-7" />
               <h1 className="text-lg font-medium">{skill.name}</h1>
             </div>
           ))}
