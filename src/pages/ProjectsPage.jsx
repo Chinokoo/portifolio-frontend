@@ -97,40 +97,18 @@ const ProjectsPage = () => {
         <h1 className=" text-3xl font-bold mb-2 px-2 mt-2 hover:text-4xl">
           Projects
         </h1>
-        <div className="flex gap-5 px-2">
-          <button
-            className="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-full text-white"
-            onClick={() => handleFilter("all")}
+        <div className="">
+          <select
+            value={filter}
+            onChange={(e) => handleFilter(e.target.value)}
+            className="px-4 py-2"
           >
-            all
-          </button>
-          <button
-            className="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-full text-white"
-            onClick={() => handleFilter("frontend")}
-          >
-            frontend
-          </button>
-          <button
-            className="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-full text-white"
-            onClick={() => handleFilter("backend")}
-          >
-            backend
-          </button>
-          <button
-            className={`px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-full text-white ${
-              filter === "fullstack" ? "bg-black text-white" : ""
-            } `}
-            onClick={() => handleFilter("fullstack")}
-          >
-            fullstack
-          </button>
-
-          <button
-            className="px-4 py-2 bg-gray-500 hover:bg-gray-700 rounded-full text-white font-bold"
-            onClick={() => handleFilter("mobile")}
-          >
-            Mobile
-          </button>
+            <option value="all">All</option>
+            <option value="frontend">Frontend</option>
+            <option value="backend">Backend</option>
+            <option value="fullstack">Fullstack</option>
+            <option value="mobile">Mobile</option>
+          </select>
         </div>
         <div className="w-full flex  flex-col px-2 gap-5 my-5 mx-2">
           {filteredProjects.length === 0 && (

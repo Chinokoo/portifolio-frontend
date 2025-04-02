@@ -22,16 +22,19 @@ function App() {
 
   if (checkingAuth) {
     return (
-      <div className="min-h-screen w-full flex justify-center items-center">
-        <AiOutlineLoading className="h-20 w-20 animate-spin" />
+      <div className="flex justify-center items-center h-screen">
+        <div className="flex flex-col items-center gap-5">
+          <AiOutlineLoading className="h-20 w-20 animate-spin" />
+          <h1 className="text-2xl font-bold">Loading please wait...</h1>
+        </div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen w-full flex justify-center">
-      <div className="w-full min-h-screen">
+    <div className="min-h-screen">
+      <div className=" min-h-screen xl:max-w-10xl">
         <Navbar />
-        <div className="  mx-0  md:mx-5 lg:mx-15">
+        <div className="max-w-7xl mx-auto px-4">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
