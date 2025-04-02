@@ -1,11 +1,12 @@
-import { FaPython, FaGitAlt, FaEye, FaGithub, FaLaravel } from "react-icons/fa";
+import { FaPython, FaGitAlt, FaEye, FaGithub } from "react-icons/fa";
 import { FaFlutter, FaReact, FaNodeJs } from "react-icons/fa6";
 import { IoLogoJavascript } from "react-icons/io5";
-import { SiFastapi } from "react-icons/si";
 import { BiLogoGoLang, BiLogoPostgresql, BiLogoMongodb } from "react-icons/bi";
 import { RiNextjsFill } from "react-icons/ri";
 import { useProjectStore } from "../store/projectStore";
 import { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 const skills = [
   {
@@ -28,10 +29,7 @@ const skills = [
     name: "Python",
     icon: FaPython,
   },
-  {
-    name: "FastAPI",
-    icon: SiFastapi,
-  },
+
   {
     name: "Git",
     icon: FaGitAlt,
@@ -52,11 +50,26 @@ const skills = [
     name: "MongoDB",
     icon: BiLogoMongodb,
   },
-  {
-    name: "Laravel",
-    icon: FaLaravel,
-  },
 ];
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 7,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 3,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 2,
+  },
+};
 
 const ProjectsPage = () => {
   const [filter, setFilter] = useState("all");
@@ -77,20 +90,19 @@ const ProjectsPage = () => {
 
   return (
     <div className="overflow-hidden w-full">
-      <div className="mb-5">
-        <h1 className=" text-3xl font-bold mb-2 px-2 mt-2 hover:text-4xl">
-          Tech Stack
-        </h1>
-        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7 gap-2 mx-2">
-          {skills.map((skill) => (
-            <div
-              className="bg-[#F5F5F0] hover:bg-black hover:text-white rounded-md px-4 py-2 mt-5  flex gap-5"
-              key={skill.id}
-            >
-              <skill.icon className="h-7 w-7 hidden md:block" />
-              <h1 className="text-lg font-medium">{skill.name}</h1>
-            </div>
-          ))}
+      <div className="my-5">
+        <div className="">
+          <Carousel responsive={responsive}>
+            {skills.map((skill) => (
+              <div
+                className="bg-[#F5F5F0] hover:bg-black hover:text-white rounded-md px-4 py-2 mx-2 flex gap-4"
+                key={skill.id}
+              >
+                <skill.icon className="h-7 w-7 hidden md:block" />
+                <h1 className="text-lg font-medium">{skill.name}</h1>
+              </div>
+            ))}
+          </Carousel>
         </div>
       </div>
       <div>
