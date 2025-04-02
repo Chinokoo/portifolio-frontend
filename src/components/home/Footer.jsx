@@ -39,7 +39,7 @@ const Footer = () => {
                 className="text-black hover:underline hover:text-gray-500 flex gap-2"
               >
                 {<link.icon size={25} />}
-                <p className="text-black">{link.title}</p>
+                <p className="text-black hidden md:block">{link.title}</p>
               </a>
             ))}
           </div>
