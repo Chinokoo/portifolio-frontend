@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useExperienceStore } from "../../../store/experienceStore";
+import { motion } from "framer-motion";
 
 const AddExperience = () => {
   const [experience, setExperience] = useState({
@@ -12,7 +13,7 @@ const AddExperience = () => {
 
   const { addExperience, loading } = useExperienceStore();
 
-  const handleExperience = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     addExperience(experience);
     setExperience({
@@ -25,85 +26,98 @@ const AddExperience = () => {
   };
 
   return (
-    <div className=" bg-gray-300 shadow-md rounded-md">
-      <h3 className="text-2xl font-medium text-center mt-5">Add Experience</h3>
-      <form
-        className="flex flex-col space-y-5 px-2"
-        onSubmit={handleExperience}
-      >
-        <label htmlFor="companyName" className="font-medium mb-1.5">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="space-y-4"
+    >
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
           Company Name
         </label>
         <input
           type="text"
-          name="companyName"
+          value={experience.companyName}
           onChange={(e) =>
             setExperience({ ...experience, companyName: e.target.value })
           }
-          className="border-2 border-black rounded-md p-2"
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
-        <label htmlFor="jobTitle" className="font-medium mb-1.5">
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
           Job Title
         </label>
         <input
           type="text"
-          name="jobTitle"
+          value={experience.jobTitle}
           onChange={(e) =>
             setExperience({ ...experience, jobTitle: e.target.value })
           }
-          className="border-2 border-black rounded-md p-2"
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
-        <label htmlFor="description" className="font-medium mb-1.5">
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
           Description
         </label>
         <textarea
           rows={4}
-          name="description"
-          id="name"
+          value={experience.description}
           onChange={(e) =>
             setExperience({ ...experience, description: e.target.value })
           }
-          className="border-2 border-black rounded-md p-2"
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
-        <div className="flex flex-col flex-wrap md:flex-row gap-3 md:gap-5">
-          <label className="font-medium mb-1.5" htmlFor="startDate">
-            Starting Date
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-[var(--color-text)]">
+            Start Date
           </label>
           <input
             type="date"
-            name="startDate"
-            id="date"
+            value={experience.startDate}
             onChange={(e) =>
               setExperience({ ...experience, startDate: e.target.value })
             }
-            className="border-2 border-black rounded-md p-2"
+            className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+            required
           />
-          <label className="font-medium mb-1.5" htmlFor="endDate">
-            Ending Date
+        </div>
+
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-[var(--color-text)]">
+            End Date
           </label>
           <input
             type="date"
-            name="endDate"
-            id="date"
+            value={experience.endDate}
             onChange={(e) =>
               setExperience({ ...experience, endDate: e.target.value })
             }
-            className="border-2 border-black rounded-md p-2"
+            className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+            required
           />
         </div>
-        <button
-          className={`${
-            !loading
-              ? "w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
-              : "w-full py-2 bg-black hover:bg-gray-700 opacity-50 cursor-not-allowed my-5 text-white rounded-md"
-          } `}
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Loading. . ." : "Add Experience"}
-        </button>
-      </form>
-    </div>
+      </div>
+
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full bg-gradient-to-r from-[var(--color-accent)] dark:from-[#4f46e5] to-[var(--color-primary)] dark:to-[#9333ea] shadow-lg hover:shadow-xl px-4 py-2 rounded-2xl font-semibold text-white text-sm hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? "Adding..." : "Add Experience"}
+      </button>
+    </motion.div>
   );
 };
 

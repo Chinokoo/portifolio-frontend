@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEducationStore } from "../../../store/educationStore";
+import { motion } from "framer-motion";
 
 const AddEducation = () => {
   const [education, setEducation] = useState({
@@ -10,6 +11,7 @@ const AddEducation = () => {
   });
 
   const { addEducation, loading } = useEducationStore();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addEducation(education);
@@ -20,64 +22,87 @@ const AddEducation = () => {
       yearCompleted: "",
     });
   };
+
   return (
-    <div className=" shadow-md rounded-md bg-[#F5F5F0]">
-      <h3 className="text-2xl font-medium text-center mt-5">Add Education</h3>
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-5 px-2">
-        <label htmlFor="name" className="font-medium mb-1.5">
-          Name
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="space-y-4"
+    >
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
+          Institution Name
         </label>
         <input
           type="text"
-          name="name"
-          onChange={(e) => setEducation({ ...education, name: e.target.value })}
-          className="border-2 border-black rounded-md p-2"
+          value={education.name}
+          onChange={(e) =>
+            setEducation({ ...education, name: e.target.value })
+          }
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
+          Education Type
+        </label>
         <select
-          className="border-2  p-2 rounded-md"
-          onChange={(e) => setEducation({ ...education, type: e.target.value })}
+          value={education.type}
+          onChange={(e) =>
+            setEducation({ ...education, type: e.target.value })
+          }
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         >
-          <option value={""}>Select the type of education</option>
+          <option value="">Select education type</option>
           <option value="degree">Degree</option>
           <option value="certificate">Certificate</option>
           <option value="diploma">Diploma</option>
         </select>
-        <label htmlFor="description" className="font-medium mb-1.5">
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
           Description
         </label>
         <textarea
           rows={4}
-          name="description"
-          id="name"
+          value={education.description}
           onChange={(e) =>
             setEducation({ ...education, description: e.target.value })
           }
-          className="border-2 border-black rounded-md p-2"
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
-        <label className="font-medium mb-1.5" htmlFor="date">
-          Date
+      </div>
+
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-[var(--color-text)]">
+          Completion Date
         </label>
         <input
           type="date"
-          name="date"
+          value={education.yearCompleted}
           onChange={(e) =>
             setEducation({ ...education, yearCompleted: e.target.value })
           }
-          className="border-2 border-black rounded-md p-2"
+          className="w-full px-3 py-2 border border-[var(--color-border)] rounded-md focus:outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+          required
         />
-        <button
-          className={`${
-            !loading
-              ? "w-full py-2 bg-black hover:bg-gray-700 my-5 text-white rounded-md"
-              : "w-full py-2 bg-black hover:bg-gray-700 opacity-50 cursor-not-allowed my-5 text-white rounded-md"
-          } `}
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Loading. . ." : "Add Education"}
-        </button>
-      </form>
-    </div>
+      </div>
+
+      <button
+        type="submit"
+        onClick={handleSubmit}
+        disabled={loading}
+        className="w-full bg-gradient-to-r from-[var(--color-accent)] dark:from-[#4f46e5] to-[var(--color-primary)] dark:to-[#9333ea] shadow-lg hover:shadow-xl px-4 py-2 rounded-2xl font-semibold text-white text-sm hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {loading ? "Adding..." : "Add Education"}
+      </button>
+    </motion.div>
   );
 };
 

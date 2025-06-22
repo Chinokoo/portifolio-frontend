@@ -12,6 +12,7 @@ import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
 import { AiOutlineLoading } from "react-icons/ai";
 import AdminHomePage from "./pages/admin/AdminHomePage";
+import Footer from "./components/home/Footer";
 
 function App() {
   const { checkAuth, checkingAuth, user } = useAuthStore();
@@ -24,17 +25,17 @@ function App() {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="flex flex-col items-center gap-5">
-          <AiOutlineLoading className="h-20 w-20 animate-spin" />
-          <h1 className="text-2xl font-bold">Loading please wait...</h1>
+          <AiOutlineLoading className="w-20 h-20 animate-spin" />
+          <h1 className="font-bold text-2xl">Loading please wait...</h1>
         </div>
       </div>
     );
   }
   return (
-    <div className="min-h-screen">
-      <div className=" min-h-screen xl:max-w-10xl">
+    <div className="flex justify-center items-center">
+      <div className="mx-auto min-h-screen container">
         <Navbar />
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
@@ -55,6 +56,7 @@ function App() {
             />
           </Routes>
         </div>
+        <Footer />
         <Toaster position="top-right" reverseOrder={true} />
       </div>
     </div>

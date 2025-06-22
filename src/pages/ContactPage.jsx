@@ -1,5 +1,7 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { motion } from "framer-motion";
+import TitleHeader from "../components/TitleHeader";
 
 const contactLinks = [
   {
@@ -21,105 +23,142 @@ const contactLinks = [
 
 const ContactPage = () => {
   return (
-    <div className="flex flex-col gap-10 mt-5 lg:flex-row">
-      <div className="w-full flex flex-col  md:justify-center px-2 gap-10 mb-5">
-        <h2 className="text-3xl font-bold text-center md:text-left  mt-2">
-          Contact Information
-        </h2>
-        <div>
-          <div className="grid grid-rows-3 gap-5">
-            <div className="card rounded bg-[#F5F5F0] hover:bg-gray-300 px-4 py-2 shadow-md">
-              <h3 className="font-bold text-2xl">Email</h3>
-              <p className="text-md text-gray-500">
-                <a
-                  href="mailto:example@example.com"
-                  className="text-gray-700 hover:text-gray-500"
-                >
-                  peterchinokoo@gmail.com
-                </a>
-              </p>
-            </div>
-            <div className="card rounded bg-[#F5F5F0] hover:bg-gray-300 px-4 py-2 shadow-md">
-              <h3 className="font-bold text-2xl">Phone</h3>
-              <p className="text-md text-gray-500">+27 62 419 0143</p>
-            </div>
-            <div className="card rounded bg-[#F5F5F0] hover:bg-gray-300 px-4 py-2 shadow-md">
-              <h3 className="font-bold text-2xl">Social Media</h3>
-              <div className="flex flex-wrap gap-5 p-3">
-                {contactLinks.map((link) => (
+    <div className="mx-auto mt-4 px-4 py-10 md:py-20 container">
+      <TitleHeader
+        title={"Get In Touch"}
+        text={"Let's connect and discuss opportunities"}
+      />
+
+      <div className="gap-8 grid grid-cols-1 lg:grid-cols-2 mt-12">
+        {/* Contact Information */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-6"
+        >
+          <div className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] shadow-lg p-8 rounded-2xl">
+            <h2 className="mb-6 font-bold text-[var(--color-primary)] text-2xl">
+              Contact Information
+            </h2>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <MdEmail className="mt-1 text-[var(--color-accent)] text-2xl" />
+                <div>
+                  <h3 className="font-semibold text-lg">Email</h3>
                   <a
-                    key={link.title}
-                    href={link.link}
-                    target="_blank"
-                    className="text-black hover:underline hover:text-gray-500 flex gap-2"
+                    href="mailto:peterchinokoo@gmail.com"
+                    className="text-[var(--color-text)] hover:text-[var(--color-accent)] transition-colors"
                   >
-                    {<link.icon size={25} />}
-                    <p className="text-black">{link.title}</p>
+                    peterchinokoo@gmail.com
                   </a>
-                ))}
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="mt-1 text-[var(--color-accent)] text-2xl">
+                  📱
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Phone</h3>
+                  <p className="text-[var(--color-text)]">+27 62 419 0143</p>
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <h3 className="mb-3 font-semibold text-lg">Social Media</h3>
+                <div className="flex flex-wrap gap-4">
+                  {contactLinks.map((link) => (
+                    <motion.a
+                      key={link.title}
+                      href={link.link}
+                      target="_blank"
+                      whileHover={{ y: -2 }}
+                      className="flex items-center gap-2 bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] shadow-sm hover:shadow-md px-4 py-3 rounded-lg transition-all"
+                    >
+                      <link.icon
+                        className="text-[var(--color-accent)]"
+                        size={20}
+                      />
+                      <span className="text-[var(--color-text)]">
+                        {link.title}
+                      </span>
+                    </motion.a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="w-full flex flex-col bg-gray-300 px-5 rounded-lg shadow-lg md:justify-center gap-10 mb-5">
-        <h2 className="text-3xl font-bold text-gray-800   text-center md:text-left  mt-2">
-          Message
-        </h2>
-        <div>
-          <form>
-            <div className="mb-4">
+        </motion.div>
+
+        {/* Contact Form */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] shadow-lg p-8 rounded-2xl"
+        >
+          <h2 className="mb-6 font-bold text-[var(--color-primary)] text-2xl">
+            Send a Message
+          </h2>
+
+          <form className="space-y-4">
+            <div>
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="name"
+                className="block mb-1 font-medium text-[var(--color-text)] text-sm"
               >
                 Name
               </label>
               <input
-                className="shadow appearance-none border-gray-400 rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="name"
                 type="text"
-                placeholder="Your Name"
+                id="name"
+                className="bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] px-4 py-2 border border-[var(--color-border)] focus:border-transparent rounded-lg focus:ring-[var(--color-accent)] focus:ring-2 w-full text-[var(--color-text)]"
+                placeholder="Your name"
               />
             </div>
-            <div className="mb-4">
+
+            <div>
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="email"
+                className="block mb-1 font-medium text-[var(--color-text)] text-sm"
               >
                 Email
               </label>
               <input
-                className="shadow appearance-none border-gray-500 rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
                 type="email"
-                placeholder="Your Email"
+                id="email"
+                className="bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] px-4 py-2 border border-[var(--color-border)] focus:border-transparent rounded-lg focus:ring-[var(--color-accent)] focus:ring-2 w-full text-[var(--color-text)]"
+                placeholder="Your email"
               />
             </div>
-            <div className="mb-4">
+
+            <div>
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
                 htmlFor="message"
+                className="block mb-1 font-medium text-[var(--color-text)] text-sm"
               >
                 Message
               </label>
               <textarea
-                rows={4}
-                className="shadow appearance-none border-gray-500 rounded w-full py-2 px-3 bg-white text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="message"
-                placeholder="Your Message"
-              />
+                rows={4}
+                className="bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] px-4 py-2 border border-[var(--color-border)] focus:border-transparent rounded-lg focus:ring-[var(--color-accent)] focus:ring-2 w-full text-[var(--color-text)]"
+                placeholder="Your message"
+              ></textarea>
             </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-6 mb-5 rounded focus:outline-none focus:shadow-outline"
-                type="submit"
-              >
-                Send
-              </button>
-            </div>
+
+            <motion.button
+              type="submit"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="bg-gradient-to-r from-[var(--color-accent)] dark:from-[#4f46e5] to-[var(--color-primary)] dark:to-[#9333ea] shadow-lg hover:shadow-xl px-4 py-2 rounded-2xl font-semibold text-white text-sm hover:scale-[1.02] transition-all duration-300"
+            >
+              Send Message
+            </motion.button>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

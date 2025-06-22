@@ -9,6 +9,7 @@ import ProjectsPage from "./ProjectsPage";
 import ExperiencePage from "./ExperiencePage";
 import EducationPage from "./EducationPage";
 import { useAuthStore } from "../../store/authStore";
+import { motion } from "framer-motion";
 
 const AdminHomePage = () => {
   const [isTab, setIsTab] = useState("add");
@@ -18,112 +19,116 @@ const AdminHomePage = () => {
   const handleLogout = () => {
     logOut();
   };
+
+  const navItems = [
+    { id: "add", icon: MdAddCircle, label: "Add", component: <AddPage /> },
+    {
+      id: "projects",
+      icon: PiProjectorScreenChartThin,
+      label: "Projects",
+      component: <ProjectsPage />,
+    },
+    {
+      id: "experience",
+      icon: BsWrenchAdjustable,
+      label: "Experience",
+      component: <ExperiencePage />,
+    },
+    {
+      id: "education",
+      icon: MdOutlineSchool,
+      label: "Education",
+      component: <EducationPage />,
+    },
+  ];
+
   return (
-    <div className="min-h-screen w-full flex">
-      <div className=" w-2/12 bg-[#F5F5F0] shadow-md min-h-screen">
-        <ul className="w-full mt-10">
-          <li>
-            <button
-              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
-                isTab === "add" ? "bg-black text-white" : ""
-              } hover:text-white `}
-              onClick={() => setIsTab("add")}
-            >
-              <MdAddCircle className="group-hover:animate-ping" size={20} />
-              <h2 className="font-medium hidden md:block ">Add</h2>
-            </button>
-          </li>
-          <li>
-            <button
-              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
-                isTab === "projects" ? "bg-black text-white" : ""
-              } hover:text-white `}
-              onClick={() => setIsTab("projects")}
-            >
-              <PiProjectorScreenChartThin
-                className="group-hover:animate-bounce"
-                size={20}
-              />
-              <h2 className="font-medium hidden md:block">Projects</h2>
-            </button>
-          </li>
-          <li>
-            <button
-              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
-                isTab === "experience" ? "bg-black text-white" : ""
-              } hover:text-white `}
-              onClick={() => setIsTab("experience")}
-            >
-              <BsWrenchAdjustable size={20} />
-              <h2 className="font-medium hidden md:block">Experience</h2>
-            </button>
-          </li>
-          <li>
-            <button
-              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
-                isTab === "education" ? "bg-black text-white" : ""
-              } hover:text-white `}
-              onClick={() => setIsTab("education")}
-            >
-              <MdOutlineSchool
-                className="group-hover:animate-bounce"
-                size={20}
-              />
-              <h2 className="font-medium hidden md:block">Education</h2>
-            </button>
-          </li>
-          <li>
-            <button
-              className={`flex group w-full gap-2 items-center px-4 py-2 hover:bg-gray-500 ${
-                isTab === "logout" ? "bg-black text-white" : ""
-              } hover:text-white `}
-              onClick={() => setLogOutModal(true)}
-            >
-              <AiOutlineLogout
-                className="group-hover:animate-pulse"
-                size={20}
-              />
-              <h2 className="font-medium hidden md:block">Log out</h2>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="flex-1">
-        {isTab === "add" && <AddPage />}
-        {isTab === "projects" && <ProjectsPage />}
-        {isTab === "experience" && <ExperiencePage />}
-        {isTab === "education" && <EducationPage />}
-      </div>
-      {logOutModal && (
-        <div className="w-[90%] min-h-screen flex justify-center items-center  bg-[rgba(0,0,0,0.3)] z-20 absolute top-0  ">
-          <div className=" mx-4 lg:m-4 lg:mb-20 opacity-100 max-h-full overflow-hidden bg-gray-100 w-full  md:w-md  inset-0  z-50 rounded-md">
-            <div className="flex justify-end">
+    <div className="flex bg-[var(--color-bg-light)] dark:bg-[var(--color-bg-dark)] w-full min-h-screen">
+      {/* Sidebar */}
+      <motion.div
+        initial={{ x: -20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        className="bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] shadow-lg w-64"
+      >
+        <div className="p-4 border-[var(--color-border)] border-b">
+          <h1 className="font-bold text-[var(--color-primary)] text-xl">
+            Admin Panel
+          </h1>
+        </div>
+
+        <nav className="p-4">
+          <ul className="space-y-2">
+            {navItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  onClick={() => setIsTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+                    isTab === item.id
+                      ? "bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-primary)] text-white"
+                      : "text-[var(--color-text)] hover:bg-[var(--color-bg-light)] dark:hover:bg-[var(--color-bg)]"
+                  }`}
+                >
+                  <item.icon size={20} />
+                  <span>{item.label}</span>
+                </button>
+              </li>
+            ))}
+
+            <li>
               <button
-                className="px-4 py-2"
-                onClick={() => setLogOutModal(false)}
+                onClick={() => setLogOutModal(true)}
+                className="flex items-center gap-3 hover:bg-[var(--color-bg-light)] dark:hover:bg-[var(--color-bg)] px-4 py-3 rounded-lg w-full text-[var(--color-text)] transition-colors"
               >
-                <FaXmark className="w-5 h-5" />
+                <AiOutlineLogout size={20} />
+                <span>Logout</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </motion.div>
+
+      {/* Main Content */}
+      <div className="flex-1 p-4 overflow-auto">
+        {navItems.find((item) => item.id === isTab)?.component}
+      </div>
+
+      {/* Logout Modal */}
+      {logOutModal && (
+        <div className="z-50 fixed inset-0 flex justify-center items-center bg-black/50">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-[var(--color-bg)] dark:bg-[var(--color-secondary)] shadow-xl p-6 rounded-xl w-full max-w-md"
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-bold text-[var(--color-primary)] text-xl">
+                Confirm Logout
+              </h3>
+              <button onClick={() => setLogOutModal(false)}>
+                <FaXmark className="text-[var(--color-text)] hover:text-[var(--color-accent)]" />
               </button>
             </div>
-            <h1 className="text-2xl font-bold px-2 text-red-500">Log Out!</h1>
-            <p className="px-2 py-2 text-sm text-gray-500">
-              Are you sure you want to log out?
+
+            <p className="mb-6 text-[var(--color-text)]">
+              Are you sure you want to log out of the admin panel?
             </p>
-            <div className="px-2 flex gap-2">
+
+            <div className="flex gap-3">
               <button
-                className="w-full py-2 bg-black hover:bg-gray-700  my-5 text-white rounded-md"
                 onClick={() => setLogOutModal(false)}
+                className="flex-1 hover:bg-[var(--color-bg-light)] dark:hover:bg-[var(--color-bg)] px-4 py-2 border border-[var(--color-border)] rounded-lg text-[var(--color-text)] transition-colors"
               >
                 Cancel
               </button>
               <button
-                className="w-full py-2 bg-red-500 hover:bg-red-700  my-5 text-white rounded-md"
                 onClick={handleLogout}
+                className="flex-1 bg-red-500 hover:bg-red-600 px-4 py-2 rounded-lg text-white transition-colors"
               >
-                logout
+                Logout
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </div>
