@@ -35,6 +35,7 @@ const responsive = {
   mobile: {
     breakpoint: { max: 640, min: 0 },
     items: 1,
+    partialVisibilityGutter: 10,
   },
 };
 
@@ -46,7 +47,7 @@ const ProjectCarousel = () => {
   }, [getProjects]);
 
   return (
-    <div className="relative">
+    <div className="relative px-2">
       <Carousel
         responsive={responsive}
         infinite={true}
@@ -58,7 +59,7 @@ const ProjectCarousel = () => {
         arrows
       >
         {projects.map((slide, index) => (
-          <div className="relative mx-4 w-sm" key={index}>
+          <div className="relative mx-4 w-full md:w-xs lg:w-sm" key={index}>
             <img
               src={slide.image}
               alt="slide"
