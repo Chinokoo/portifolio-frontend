@@ -59,13 +59,16 @@ const ProjectCarousel = () => {
         arrows
       >
         {projects.map((slide, index) => (
-          <div className="relative mx-4 w-full md:w-xs lg:w-sm" key={index}>
+          <div
+            className="relative mx-4 rounded-b-md w-full md:w-xs lg:w-sm"
+            key={index}
+          >
             <img
               src={slide.image}
               alt="slide"
               className="rounded-t-md w-full h-[320px] object-scale-down"
             />
-            <div className="bottom-0 left-0 absolute bg-black/80 px-5 w-full h-20">
+            <div className="bottom-0 left-0 absolute bg-black/80 px-5 rounded-b-md w-full h-20">
               <div className="flex justify-between items-center w-full h-full">
                 <div className="flex-center gap-2">
                   <p className="opacity-80 text-white md:text-2xl">
